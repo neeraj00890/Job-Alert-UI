@@ -1,0 +1,17 @@
+
+<mat-toolbar color="primary">
+    <mat-toolbar-row> <h3>Recipe Book</h3></mat-toolbar-row>
+   
+    <mat-toolbar-row >
+        <button mat-raised-button color="primary"  routerLinkActive="active">Angular-Material</button>
+      
+         <span class="spacer"></span>
+      <div>
+        <ng-template [ngIf] = "true">  
+          <button mat-raised-button color="primary" routerLink ="" routerLinkActive="active" >LogIn</button>
+          <button mat-raised-button color="primary" routerLink ="/sign-up" routerLinkActive="active">Register</button>
+        </ng-template>
+       <button mat-raised-button color="primary"  *ngIf="false">Logout</button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
