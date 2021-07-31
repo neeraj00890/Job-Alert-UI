@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    # Path to dockerfile.
+    # '.' represents the current directory in which
+    # docker-compose.yml is present.
+    build: 
+        context: .
+        dockerfile: ./images/Dockerfile
+
+    # Mapping of container port to host
+    
+    ports:
+      - "5200:5200"
+      - "4200:4200"
+    # Mount volume 
+    volumes: 
+        - .:/var/www/app

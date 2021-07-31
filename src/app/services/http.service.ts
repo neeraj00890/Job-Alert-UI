@@ -12,21 +12,21 @@ export class HttpService {
   }
 
 
-  async get(url: string, headers: HttpHeaders) {
-    this.httpClient.get(environment.baseUrl + url, {
+  get(url: string, headers: HttpHeaders) {
+   return this.httpClient.get(environment.baseUrl + url, {
       headers: headers
     }).toPromise();
   }
 
-  async post(url: string, payload: any, headers: HttpHeaders = new HttpHeaders()) {
+  post(url: string, payload: any, headers: HttpHeaders = new HttpHeaders()) {
     headers.set('content-type', 'application/json');
-    this.httpClient.post(environment.baseUrl + url, payload, {
+   return this.httpClient.post(environment.baseUrl + url, payload, {
       headers: headers
     }).toPromise();
   }
 
-  async put(url: string, payload: any, headers: HttpHeaders) {
-    this.httpClient.put(environment.baseUrl + url, payload, {
+  put(url: string, payload: any, headers: HttpHeaders) {
+    return this.httpClient.put(environment.baseUrl + url, payload, {
       headers: headers
     }).toPromise();
   }

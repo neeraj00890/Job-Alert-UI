@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective } from '@angular/forms'
 import { Router } from '@angular/router';
+import { Login } from 'src/app/types/loginDto';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-logIn',
@@ -9,18 +11,24 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
-    'email': new FormControl(null),
+    'username': new FormControl(null),
     'password': new FormControl(null)
   })
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private auth: AuthService) { }
 
   ngOnInit() {
   }
 
-  onSubmit(formData: FormGroup, loginDirective: FormGroupDirective) {
-    const email = formData.value.email;
-    const password = formData.value.password;
+  async onSubmit(formData: FormGroup) {
+    try {
+      const loginPayload = formData.value as Login;
+      await this.auth.loginUser(loginPayload);
+      this.router.navigate(["home"]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   OnRegistrationClick() {

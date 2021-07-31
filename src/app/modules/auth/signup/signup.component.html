@@ -2,20 +2,10 @@
   <div class="login-content">
     <mat-toolbar class="login-toolbar" color="primary">REGISTER</mat-toolbar>
     <mat-card>
-      <form
-        [formGroup]="registerForm"
-        #formDirective="ngForm"
-        (ngSubmit)="onSubmit(registerForm, formDirective)"
-      >
+      <form [formGroup]="registerForm" #formDirective="ngForm" (ngSubmit)="onSubmit(registerForm, formDirective)">
         <mat-form-field>
           <mat-icon matPrefix>email</mat-icon>
-          <input
-            autofocus
-            type="email"
-            matInput
-            placeholder="Email *"
-            formControlName="email"
-          />
+          <input autofocus type="email" matInput placeholder="Email *" formControlName="email" />
           <mat-error *ngIf="checkValidation('email')">
             {{ emaiErrors() }}
           </mat-error>
@@ -23,13 +13,7 @@
 
         <mat-form-field>
           <mat-icon matPrefix>person_outline</mat-icon>
-          <input
-            autofocus
-            type="text"
-            matInput
-            placeholder="Username *"
-            formControlName="username"
-          />
+          <input autofocus type="text" matInput placeholder="Username *" formControlName="username" />
           <mat-error *ngIf="checkValidation('username')">
             {{ fieldRequired }}
           </mat-error>
@@ -38,13 +22,7 @@
 
         <mat-form-field>
           <mat-icon matPrefix>person_outline</mat-icon>
-          <input
-            autofocus
-            type="text"
-            matInput
-            placeholder="First name *"
-            formControlName="firstname"
-          />
+          <input autofocus type="text" matInput placeholder="First name *" formControlName="firstname" />
           <mat-error *ngIf="checkValidation('firstname')">
             {{ fieldRequired }}
           </mat-error>
@@ -52,13 +30,7 @@
 
         <mat-form-field>
           <mat-icon matPrefix>person_outline</mat-icon>
-          <input
-            autofocus
-            type="text"
-            matInput
-            placeholder="Last name *"
-            formControlName="lastname"
-          />
+          <input autofocus type="text" matInput placeholder="Last name *" formControlName="lastname" />
           <mat-error *ngIf="checkValidation('lastname')">
             {{ fieldRequired }}
           </mat-error>
@@ -66,13 +38,7 @@
 
         <mat-form-field>
           <mat-icon matPrefix>person_outline</mat-icon>
-          <input
-            autofocus
-            type="text"
-            matInput
-            placeholder="Phone number *"
-            formControlName="phoneNo"
-          />
+          <input autofocus type="text" matInput placeholder="Phone number *" formControlName="phoneNo" />
           <mat-error *ngIf="checkValidation('phoneNo')">
             {{ fieldRequired }}
           </mat-error>
@@ -82,33 +48,28 @@
 
         <mat-form-field>
           <mat-icon matPrefix>lock_outline</mat-icon>
-          <input
-            type="password"
-            autocomplete="false"
-            matInput
-            placeholder="Password *"
-            formControlName="password"
-          />
-          <mat-hint
-            >Choose a password of at least eight characters, one uppercase
-            letter and one number</mat-hint
-          >
+          <input type="password" autocomplete="false" matInput placeholder="Password *" formControlName="password" />
+          <mat-hint>Choose a password of at least eight characters, one uppercase
+            letter and one number</mat-hint>
           <mat-error *ngIf="checkValidation('password')">
             {{ getErrorPassword() }}
           </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Register as:</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role.name">
+              {{role.label}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
 
 
 
         <hr />
         <div class="socialMediaFlex">
-          <button
-            style="width: 50%"
-            [disabled]="registerForm.invalid"
-            type="submit"
-            mat-raised-button
-            color="primary"
-          >
+          <button style="width: 50%" [disabled]="registerForm.invalid" type="submit" mat-raised-button color="primary">
             Submit
           </button>
         </div>

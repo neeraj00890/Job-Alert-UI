@@ -18,9 +18,23 @@ export class SignupComponent implements OnInit {
       'lastname': new FormControl(null, [Validators.required]),
       'phoneNo': new FormControl(null, [Validators.required]),
       'password': new FormControl(null, [Validators.required, this.checkPassword]),
+      'role': new FormControl(null, [Validators.required]),
     }
   );
   fieldRequired: string = "This field is required"
+  roles: Array<{
+    name: String,
+    label: String,
+  }> = [
+    {
+      label: "Admin",
+      name: "ROLE_ADMIN",
+    },
+    {
+      label: "Student",
+      name: "ROLE_STUDENT",
+    }
+  ];
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
@@ -48,6 +62,6 @@ export class SignupComponent implements OnInit {
   }
 
   async onSubmit(formData: FormGroup, formDirective: FormGroupDirective) {
-   await  this.auth.registerUser(formData.value)
+   await this.auth.registerUser(formData.value)
   }
 }
