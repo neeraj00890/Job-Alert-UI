@@ -7,29 +7,24 @@ import { environment } from 'src/environments/environment';
 })
 export class HttpService {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {}
 
-  }
-
-
-  get(url: string, headers: HttpHeaders) {
+  get(url: string, headers: HttpHeaders = new HttpHeaders()): Promise<any> {
    return this.httpClient.get(environment.baseUrl + url, {
       headers: headers
     }).toPromise();
   }
 
-  post(url: string, payload: any, headers: HttpHeaders = new HttpHeaders()) {
+  post(url: string, payload: any, headers: HttpHeaders = new HttpHeaders()): Promise<any> {
     headers.set('content-type', 'application/json');
    return this.httpClient.post(environment.baseUrl + url, payload, {
       headers: headers
     }).toPromise();
   }
 
-  put(url: string, payload: any, headers: HttpHeaders) {
+  put(url: string, payload: any, headers: HttpHeaders): Promise<any> {
     return this.httpClient.put(environment.baseUrl + url, payload, {
       headers: headers
     }).toPromise();
   }
-
-
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HomeRoutingModule } from './home.routing';
 import { MaterialModule } from '../material/material.module';
+import { HomeService } from './home.service';
 
 
 
@@ -14,6 +15,7 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     HomeRoutingModule,
     MaterialModule
-  ]
+  ],
+  providers: [HomeService]
 })
 export class HomeModule { }

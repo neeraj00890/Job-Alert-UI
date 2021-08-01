@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/services/common.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
+  constructor(private auth: AuthService, private _commonService: CommonService) { }
+  
   emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   registerForm: FormGroup = new FormGroup(
     {
@@ -26,16 +28,15 @@ export class SignupComponent implements OnInit {
     name: String,
     label: String,
   }> = [
-    {
-      label: "Admin",
-      name: "ROLE_ADMIN",
-    },
-    {
-      label: "Student",
-      name: "ROLE_STUDENT",
-    }
-  ];
-  constructor(private auth: AuthService) { }
+      {
+        label: "Admin",
+        name: "ROLE_ADMIN",
+      },
+      {
+        label: "Student",
+        name: "ROLE_STUDENT",
+      }
+    ];
 
   ngOnInit() {
   }
@@ -62,6 +63,10 @@ export class SignupComponent implements OnInit {
   }
 
   async onSubmit(formData: FormGroup, formDirective: FormGroupDirective) {
-   await this.auth.registerUser(formData.value)
+    try {
+      await this.auth.registerUser(formData.value)
+    } catch (error) {
+      this._commonService.openSnackBar(error.error.message);
+    }
   }
 }
